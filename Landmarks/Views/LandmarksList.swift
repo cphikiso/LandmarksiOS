@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LandmarksList: View {
-    @State private var showFavoritesOnly = true
+    @State private var showFavoritesOnly = false
     
     var filteredLandmarks: [Landmark] {
         landmarks.filter { landmark in
@@ -18,14 +18,20 @@ struct LandmarksList: View {
     
     var body: some View {
         NavigationView {
-            List(filteredLandmarks) { landmark in
-                NavigationLink{
-                    LandmarkDetail(landmark: landmark)
+            List {
+                Toggle(isOn: $showFavoritesOnly) {
+                    Text("Favorites only")
                 }
-            label: {LandmarkRow(landmark: landmark)}
                 
+                ForEach(filteredLandmarks) { landmark in
+                    NavigationLink{
+                        LandmarkDetail(landmark: landmark)
+                    }
+                label: {LandmarkRow(landmark: landmark)}
+                    
+                }
+                .navigationTitle("Landmarks")
             }
-            .navigationTitle("Landmarks")
         }
         
     }
