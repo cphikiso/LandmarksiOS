@@ -27,7 +27,7 @@ struct BadgeBackground: View {
                     path.addLine(
                         to: CGPoint(
                             x: width * segment.line.x + xOffset,
-                            y: width * segment.line.y
+                            y: height * segment.line.y
                         )
                     )
                     
